@@ -36,31 +36,30 @@ public class orderStepDef {
         logStep.userIsRoutedToDashboardPageAsLoggedInUser();
     }
 
-    @And("User searches for product {string}")
-    public void userSearchesForProduct(String arg0) throws InterruptedException {
-        order.searchProduct(arg0);
+    @And("the user searches for a product by name")
+    public void userSearchesForProduct() throws InterruptedException, IOException {
+        order.searchProduct(excelConfig.readFromCell(fileToRead,"product",1,"productName"));
 
     }
 
-    @And("User selects size {string} , color {string} and quantity {string} for searched product")
-    public void userSelectsSizeColorAndQuantityForSearchedProduct(String arg0, String arg1, String arg2) {
-        order.selectSize(arg0);
-        order.selectColor(arg1);
-        order.enterQuantity(arg2);
+    @And("selects the desired product variant")
+    public void userSelectsSizeColorAndQuantityForSearchedProduct() throws IOException {
+        order.selectSize(excelConfig.readFromCell(fileToRead,"product",1, "productSize"));
+        order.selectColor(excelConfig.readFromCell(fileToRead,"product",1, "productColor"));
+        order.enterQuantity(excelConfig.readFromCell(fileToRead,"product",1, "productQuantity"));
     }
 
-    @And("User adds selected product to cart")
+    @And("adds the product to the cart")
     public void userAddsSelectedProductToCart() throws InterruptedException {
         order.addToCart();
     }
 
-    @When("User proceeds to checkout")
+    @And("proceeds to checkout")
     public void userProceedsToCheckout() throws InterruptedException {
         order.proceedToCheckOut();
     }
-
-    @Then("The order is placed successfully and Order id is generated")
-    public void theOrderIsPlacedSuccessfullyAndOrderIdIsGenerated() throws IOException, InterruptedException {
+    @And("provides shipping details")
+    public void providesShippingDetails() throws IOException, InterruptedException {
         order.enterShippingDetails(excelConfig.readFromCell(fileToRead,"shipping",1,"firstname"),
                 excelConfig.readFromCell(fileToRead,"shipping",1,"lastname"),
                 excelConfig.readFromCell(fileToRead,"shipping",1,"street"),
@@ -69,6 +68,18 @@ public class orderStepDef {
                 excelConfig.readFromCell(fileToRead,"shipping",1,"country"),
                 excelConfig.readFromCell(fileToRead,"shipping",1,"postcode"),
                 excelConfig.readFromCell(fileToRead,"shipping",1,"telephone"));
+    }
+
+    @And("confirms the order")
+    public void confirmsTheOrder() {
+        order.orderConfirm();
+    }
+
+    @Then("the order is placed successfully and order id is generated")
+    public void theOrderIsPlacedSuccessfullyAndOrderIdIsGenerated() throws IOException {
         excelConfig.writeDataToExcel(fileToRead,"order",0,0, order.orderDone());
     }
+
+
+
 }

@@ -124,34 +124,35 @@ public class orderPage {
     }
 
     public void enterShippingDetails(String firstname, String lastname, String street, String city, String regionId, String country, String postcod , String telephone) throws InterruptedException {
-
-     utility.wait5Seconds();
-     utility.waitForElementToBeClickable(newAddressLocator).click();
-    utility.waitForElementToBePresent(firstNameLocator).clear();
-    firstNameLocator.sendKeys(firstname);
-    utility.waitForElementToBePresent(lastNameLocator).clear();
-    lastNameLocator.sendKeys(lastname);
-    utility.waitForElementToBePresent(streetLocator).sendKeys(street);
-    utility.waitForElementToBePresent(cityLoctaor).sendKeys(city);
-    utility.scrollIntoView(countryLocator);
-    select = new Select(countryLocator);
-    countryLocator.click();
-    select.selectByVisibleText(country);
-    utility.waitForElementToBePresent(regionLocator).sendKeys(regionId);
-    utility.waitForElementToBePresent(postCodeLocator).sendKeys(postcod);
-    utility.waitForElementToBePresent(phoneLocator).sendKeys(telephone);
-    saveToAddressBookLocator.click();
-    utility.waitForElementToBeClickable(saveAddressLocator).click();
+     utility.pageLoad();
+     utility.waitForElementToBePresent(newAddressLocator).click();
+     utility.waitForElementToBePresent(firstNameLocator).clear();
+     firstNameLocator.sendKeys(firstname);
+     utility.waitForElementToBePresent(lastNameLocator).clear();
+     lastNameLocator.sendKeys(lastname);
+     utility.waitForElementToBePresent(streetLocator).sendKeys(street);
+     utility.waitForElementToBePresent(cityLoctaor).sendKeys(city);
+     utility.scrollIntoView(countryLocator);
+     select = new Select(countryLocator);
+     countryLocator.click();
+     select.selectByVisibleText(country);
+     utility.waitForElementToBePresent(regionLocator).sendKeys(regionId);
+     utility.waitForElementToBePresent(postCodeLocator).sendKeys(postcod);
+     utility.waitForElementToBePresent(phoneLocator).sendKeys(telephone);
+     saveToAddressBookLocator.click();
+     utility.waitForElementToBeClickable(saveAddressLocator).click();
    // utility.scrollIntoView(continueLocator);
-        utility.wait2Seconds();
+        // utility.wait2Seconds();
     utility.waitForElementToBeClickable(continueLocator).click();
-    utility.pageLoad();
-    utility.waitForElementToBePresent(billAddressShipAddressLocator).click();
-    utility.waitForElementToBeClickable(placedOrderLocator).click();
+
 
 
     }
-
+    public void orderConfirm(){
+        utility.pageLoad();
+        utility.waitForElementToBePresent(billAddressShipAddressLocator).click();
+        utility.waitForElementToBeClickable(placedOrderLocator).click();
+    }
     public String orderDone() {
         utility.pageLoad();
         Assert.assertTrue(utility.waitForElementToBePresent(orderConfirmMessage).isDisplayed(),"Order failed");

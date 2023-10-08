@@ -11,7 +11,6 @@ import java.time.Duration;
 
 public class utility{
     private static final int timeoutSeconds = 40;
-    private static final int pollingIntervalMillis = 1000;
     static WebDriverWait wait;
     static driverManager manager = new driverManager();
     static WebDriver driver  = manager.initializeDriver();
@@ -52,15 +51,6 @@ public class utility{
         }
     }
 
-
-    public static WebElement fluentWaitForElement(WebDriver driver, By Locator) {
-        FluentWait<WebDriver> wait = new FluentWait<>(driver)
-                .withTimeout(Duration.ofSeconds(timeoutSeconds))
-                .pollingEvery(Duration.ofMillis(pollingIntervalMillis))
-                .ignoring(NoSuchElementException.class);
-
-        return wait.until(ExpectedConditions.presenceOfElementLocated(Locator));
-    }
 
     public static void checkElementIsPresent(WebElement Locator) {
         if (Locator.isDisplayed()) {

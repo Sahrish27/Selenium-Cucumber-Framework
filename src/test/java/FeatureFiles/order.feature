@@ -2,12 +2,16 @@
 # Tags: optional
 
 Feature: User is making order of jacket
+  Background:
+    Given User is logged in
 
   Scenario: Making a order
-    Given User is logged in
-      And User searches for product "Adrienne Trek Jacket"
-      And User selects size "S" , color "Gray" and quantity "1" for searched product
-      And User adds selected product to cart
-      When User proceeds to checkout
-      Then The order is placed successfully and Order id is generated
+      When the user searches for a product by name
+      And selects the desired product variant
+      And adds the product to the cart
+      And proceeds to checkout
+      And provides shipping details
+      And confirms the order
+      Then the order is placed successfully and order id is generated
+
 
