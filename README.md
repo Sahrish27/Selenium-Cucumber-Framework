@@ -1,7 +1,3 @@
-Certainly! Here's the content you provided, formatted in a typical README style:
-
----
-
 # Cucumber Selenium Automation Framework for Magento Mock Website
 
 ## Overview
