@@ -1,0 +1,1 @@
+[{"uid":"a7fddfd56906ff8a","name":"Making a order","time":{"start":1696433126718,"stop":1696433173535,"duration":46817},"status":"passed","severity":"normal"},{"uid":"f78dc87a18f9ffb8","name":"Runs Cucumber Scenarios","time":{"start":1696433126541,"stop":1696433173691,"duration":47150},"status":"passed","severity":"normal"}]
